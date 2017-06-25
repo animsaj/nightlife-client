@@ -1,0 +1,26 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "back-end API created with express and webtask",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "express",
+    "webtask",
+    "serverles",
+    "FaaS"
+  ],
+  "author": "animsaj",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^2.4.1",
+    "body-parser": "^1.17.2",
+    "cors": "^2.8.3",
+    "express": "^4.15.3",
+    "express-jwt": "^5.3.0",
+    "mongoose": "^4.10.8",
+    "yelp-fusion": "^1.0.3"
+  }
+}
