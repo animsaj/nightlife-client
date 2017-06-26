@@ -5,7 +5,6 @@ var yelp = require('yelp-fusion');
 var app = express();
 var jwt = require('express-jwt');
 var mongoose = require('mongoose');
-var async = require('async');
 var Bar = require('./models/bar');
 
 mongoose.connect('mongodb://animsaj:jasmina1970@ds139122.mlab.com:39122/nightlife')
