@@ -1,13 +1,13 @@
 <template>
     <div id="search-box">
-        <div class="field has-addons">
+        <form class="field has-addons" v-on:submit.prevent="sendQuery">
             <p class="control is-expanded">
                 <input class="input is-large" type="text" placeholder="Enter the city you want us to search for bars" ref="searchQuery">
             </p>
             <p class="control">
-                <button class='button is-large' v-on:click="sendQuery" :disabled="searching">Search</button>
+                <button class='button is-large' :disabled="searching">Search</button>
             </p>
-        </div>
+        </form>
     </div>
 </template>
 
@@ -16,7 +16,7 @@
 
     export default {
         name: 'search-box',
-        data () {
+        data() {
             return {
                 searching: false
             }
@@ -28,12 +28,13 @@
                 this.$refs.searchQuery.value = '';
             }
         },
-        created () {
-           bus.$on('searchFinished', function () {
+        created() {
+            bus.$on('searchFinished', function () {
                 this.searching = false;
-            }.bind(this)) 
-        } 
+            }.bind(this))
+        }
     }
+
 </script>
 <style>
     #search-box {

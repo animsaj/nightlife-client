@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var BarSchema = new mongoose.Schema({
+module.exports = new mongoose.Schema({
     name: String,
     yelpId: String,
     image_url: String,
@@ -8,5 +8,3 @@ var BarSchema = new mongoose.Schema({
     display_phone: String,
     visitors: [String]
 });
-
-module.exports = mongoose.model('Bar', BarSchema)

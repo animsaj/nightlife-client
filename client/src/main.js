@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import App from './App.vue'
-import router from './router'
 import Auth0Lock from 'auth0-lock'
 
 export const bus = new Vue()
@@ -24,6 +23,5 @@ export { lock }
 
 new Vue({
     el: '#app',
-    router,
     render: h => h(App)
 })

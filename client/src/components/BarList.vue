@@ -14,7 +14,7 @@
                 <div class="card">
                     <header class="card-header">
                         <p class="card-header-title">
-                        {{bar.name}}
+                            {{bar.name}}
                         </p>
                     </header>
                     <div class="card-image">
@@ -48,7 +48,7 @@
     export default {
         name: 'bar-list',
         props: ['user'],
-        data () {
+        data() {
             return {
                 bars: JSON.parse(localStorage.getItem('bars')),
                 error: null
@@ -56,14 +56,14 @@
         },
         methods: {
             visitBar(id, item) {
-                let url = "http://localhost:3000/bars/visit/" + id;
+                let url = "https://webtask.it.auth0.com/api/run/wt-66742f8f5098485c3dff28a55918758f-0/server/visit/" + id;
                 axios.post(url, {
                     name: item.name,
                     yelpId: item.yelpId,
                     image_url: item.image_url,
                     display_address: item.display_address,
                     display_phone: item.display_phone,
-                    visitors: [this.user.name]
+                    visitors: [...item.visitors, this.user.name]
                 })
                     .then((data) => {
                         var index = this.bars.findIndex(x => x.yelpId === item.yelpId)
@@ -76,14 +76,10 @@
                     })
             },
             cancelVisit(id, item) {
-                let url = "http://localhost:3000/bars/cancel/" + id;
+                let url = "https://webtask.it.auth0.com/api/run/wt-66742f8f5098485c3dff28a55918758f-0/server/cancel/" + id;
                 axios.post(url, {
-                    name: item.name,
                     yelpId: item.yelpId,
-                    image_url: item.image_url,
-                    display_address: item.display_address,
-                    display_phone: item.display_phone,
-                    visitors: item.visitors
+                    visitors: item.visitors.filter(visitor => visitor !== this.user.name)
                 })
                     .then((data) => {
                         var index = this.bars.findIndex(x => x.yelpId === item.yelpId)
@@ -96,13 +92,13 @@
                     })
             }
         },
-        created () {
+        created() {
             bus.$on('querySent', function (query) {
                 this.bars = [];
                 localStorage.removeItem('bars')
-                let url = "http://localhost:3000/bars/" + query;
-                axios.get(url).then((data) => {
-                    if(data.data.bars && !data.data.err) {
+                let url = "https://webtask.it.auth0.com/api/run/wt-66742f8f5098485c3dff28a55918758f-0/server/bars";
+                axios.post(url, { query: query }).then((data) => {
+                    if (data.data.bars && !data.data.err) {
                         localStorage.setItem('bars', JSON.stringify(data.data.bars))
                         this.bars = JSON.parse(localStorage.getItem('bars'));
                     } else {
@@ -116,4 +112,5 @@
             }.bind(this));
         }
     }
+
 </script>
