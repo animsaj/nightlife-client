@@ -5,10 +5,10 @@ import Auth0Lock from 'auth0-lock'
 export const bus = new Vue()
 
 var lock = new Auth0Lock(
-  'kKsSYp66OHAv29JhEP4xwoQ7qs2y80Bi',
-  'animsaj.eu.auth0.com',
-   {
-     auth: {
+  '<AUTH0_CLIENT_ID>',
+  '<AUTH0_CLIENT_SECRET>',
+  {
+    auth: {
       redirect: true,
       responseType: 'token',
       autoParseHash: true,
@@ -16,12 +16,12 @@ var lock = new Auth0Lock(
         scope: 'openid profile' // Learn about scopes: https://auth0.com/docs/scopes
       }
     }
-   }
+  }
 );
 
 export { lock }
 
 new Vue({
-    el: '#app',
-    render: h => h(App)
+  el: '#app',
+  render: h => h(App)
 })
